@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<html>
+	<head>
+		<link rel='stylesheet' src='{%static '/todos/app.css'%}'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src = "{%static 'todos/django_ajax.js'%}"></script>
+		<script src = "{%static 'todos/app.js'%}"></script>
+	</head>
+	<body>
+		<div class = "container">
+		
+			<header>
+				{% block header %}
+
+				{% endblock %}
+			</header>
+
+			<div class = "content">
+				{% block content %}
+
+				{% endblock %}
+			</div>
+
+			<div class = "form">
+				{% block form %}
+
+				{% endblock %}
+			</div>
+
+		</div>
+	</body>
