@@ -8,6 +8,7 @@ class Company(models.Model):
 
 class Stock(models.Model):
 	company = models.ForeignKey(Company)
+	scraped_at = models.DateTimeField(auto_now_add=True)
 	market_cap  = models.DecimalField(max_digits=8, decimal_places=5)
 	enterprise_value = models.DecimalField(max_digits=8, decimal_places=5)
 	trailing_pe = models.DecimalField(max_digits=8, decimal_places=5)
@@ -36,4 +37,6 @@ class Stock(models.Model):
 	bv_per_share = models.DecimalField(max_digits=8, decimal_places=5)
 	operating_cash_flow = models.DecimalField(max_digits=8, decimal_places=5)
 	levered_free_cash_flow = models.DecimalField(max_digits=8, decimal_places=5)
-	created_at = models.DateTimeField(auto_now_add=True)
+
+
+
