@@ -7,6 +7,16 @@ import json
 import re
 from valscrape.models import Stocks,Companies
 
+
+# ##set up environment in script
+# import sys, os
+# sys.path.append('/app')
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'app.settings'
+# from django.conf import settings
+
+
+
+
 ## Scrape Yahoo Finance for Stock Information ##
 
 class Finance_API:
@@ -56,19 +66,22 @@ class Finance_API:
 				bv_per_share=table_contents[27],
 				operating_cash_flow=table_contents[28],
 				levered_free_cash_flow=table_contents[29])
+			print("success!")
 			return table_contents
 
 
-print(Finance_API().scrape())
+# print(Finance_API().scrape())
 
 
 ## Populate DB with companies of Interest ##
 
-list_of_companies = {'International Business Machines':'IBM','Hewlett-Packard Corp':'HPQ','Xerox':'XRX','Computer Sciences Corp': 'CSC','Unisys Corp':'UIS','CA Technologies':'CA','Oracle':'ORCL','Symantec Corp':'SYMC','Microsoft':'MSFT','Cognizant Technology Corp':'CTSH','Amdocs Limited':'DOX','Compuware Inc':'CPWR','Citrix Corp':'CTXS','Apple Inc':'AAPL','Google':'GOOG'}
+list_of_companies = {'Int Business Machines':'IBM','Hewlett-Packard Corp':'HPQ','Xerox':'XRX','Computer Sciences Corp': 'CSC','Unisys Corp':'UIS','CA Technologies':'CA','Oracle':'ORCL','Symantec Corp':'SYMC','Microsoft':'MSFT','Cognizant Technology Corp':'CTSH','Amdocs Limited':'DOX','Compuware Inc':'CPWR','Citrix Corp':'CTXS','Apple Inc':'AAPL','Google':'GOOG'}
 
 def populate_company_list(dict):
 	for key in dict:
-		Company.objects.create(name=key,symbol=dict[key])
+		Companies.objects.create(name=key,symbol=dict[key])
 	print('Populated')
 	return None
 
+# run once #
+# populate_company_list(list_of_companies)
