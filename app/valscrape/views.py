@@ -10,6 +10,9 @@ class IndexView(View):
 	def get(self, request):
 		return render(request, self.template)
 
+	def post(self,request):
+		return render(request, self.template)
+
 class AllView(View):
 
 	def post(self,request):
@@ -26,7 +29,13 @@ class GraphView(View):
 	template = 'valscrape/bar.html'
 
 	def get(self,request):
-		return render(request, self.template)
+		name_value = []
+		all_stocks = Stocks.objects.all()
+		for stock in all_stocks:
+			company = Companies.objects.get(id=int(stock.company_id))
+			name_value_pair = (company.name,stock.trailing_pe)
+			name_value.append(name_value_pair)
+		return JsonResponse({'pe': name_value})
 
 	def post(self,request):
-		pass
+		return render(request, self.template)
