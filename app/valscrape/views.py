@@ -14,7 +14,12 @@ class IndexView(View):
 
 class AllView(View):
 
+	def post(self,request):
+		print('this is post')
+		return redirect('index')
+
 	def get(self,request):
+		print('this is get')
 		all_companies = Companies.objects.all()
 		company_array = []
 		for company in all_companies:
