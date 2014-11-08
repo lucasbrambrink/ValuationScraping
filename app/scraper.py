@@ -46,11 +46,6 @@ class Finance_API:
 					formatted_list.append(0)
 				else:
 					formatted_list.append(value)
-			for format in formatted_list:
-				print(format,count)
-				count+=1
-			
-			"""
 
 			Stocks.objects.create(company=company,
 				market_cap=table_contents[0],
@@ -81,7 +76,7 @@ class Finance_API:
 				bv_per_share=table_contents[27],
 				operating_cash_flow=table_contents[28],
 				levered_free_cash_flow=table_contents[29])
-			"""
+			
 			print("success!",company.name)
 		return None
 

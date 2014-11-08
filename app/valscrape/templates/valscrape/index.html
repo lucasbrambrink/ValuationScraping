@@ -1,7 +1,11 @@
 {% extends 'valscrape/base.html' %}
 
-{%block content%}
+{%block add_company %}
 
-
+	<form name = "add_company" id = "add_company" action = '/add' method = "POST">
+		<input type='text' value='Company'>
+		{%csrf_token%}
+		<input type = "submit" value = "Add">
+	</form>
 
 {%endblock%}
