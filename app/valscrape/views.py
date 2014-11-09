@@ -26,7 +26,7 @@ class AllView(View):
 		company_array = []
 		for company in all_companies:
 			company_array.append(company.symbol)
-		return JsonResponse({'stocks' : company_array})
+		return JsonResponse({'companies' : company_array})
 
 class GraphView(View):
 	template = 'valscrape/bar.html'
@@ -47,21 +47,55 @@ class GraphView(View):
 ## Write static file first ## this is obviously not a good way to do it,
 ## but I think it is worthy of employing good problem solving techniques. 
 
-def write_graph_file(request):
+def write_graph_file(request,data):
 	## parse the data ##
+	company = Companies.objects.get(symbol=data)
+	stock = Stocks.objects.filter(company_id=company.id)[0]
+	
+	chart_labels = ["PE","EV / EBITDA", "EV / Revenue", "Debt / Equity", "Return on Equity", " Free Cash / Revenue"]
+	chart_data = [round(float(stock.trailing_pe),3),
+		round(float(stock.EV_EBITDA),3),
+		round(float(stock.EV_revenue),3),
+		round(float(stock.total_debt_equity),3),
+		round(float(stock.return_on_equity[:-1]),3),
+		round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
+	chart_average = calculate_average()
 
-
-
+	line = "barChart("+chart_labels+","+chart_data+","+chart_average+")"
 
 	## write to function-call to file ##
 	file_names = os.listdir('valscrape/static/valscrape')
 	pathname = os.path.join('valscrape/static/valscrape',file_names[3])
 	graph = open(pathname, 'r').readlines()
-	graph[31] = "stockBar(10,15,'no','yes')"
+	graph[145] = line
 	graph_out = open(pathname, 'w')
 	graph_out.writelines(graph)
 	graph_out.close()
-	print('all this is fine')
-	return redirect('index')
+	return render(request, 'valscrape/bar.html', {'company' : company})
 
+def calculate_average():
+	all_companies = Companies.objects.all()
+	N = len(all_companies)
+	all_stocks = Stocks.objects.all()
+	average_pe = 0
+	average_EV_ebitda = 0
+	average_EV_revenue = 0
+	average_debt_equity = 0
+	average_return_equity = 0
+	average_cash_revenue = 0
+	for stock in all_stocks:
+		average_pe += round(float(stock.trailing_pe),3)
+		average_EV_ebitda += round(float(stock.EV_EBITDA),3)
+		average_EV_revenue += round(float(stock.EV_revenue),3)
+		average_debt_equity = round(float(stock.total_debt_equity),3)
+		average_return_equity = round(float(stock.return_on_equity[:-1]),3)
+		average_cash_revenue = round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
+	average_pe /= N
+	average_EV_ebitda /= N
+	average_EV_revenue /= N
+	average_debt_equity /= N
+	average_return_equity /= N
+	average_cash_revenue /= N
+	average = [average_pe,average_EV_ebitda,average_EV_revenue,average_debt_equity,average_return_equity,average_cash_revenue]
+	return average
 

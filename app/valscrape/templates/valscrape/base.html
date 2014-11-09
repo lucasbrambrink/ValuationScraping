@@ -6,7 +6,6 @@
 		<script src = "{%static 'valscrape/django_ajax.js'%}"></script>
 		<script src = "{%static 'valscrape/app.js'%}"></script>
 		<script src="{%static 'valscrape/Chart.js'%}"></script>
-		<script src="{%static 'valscrape/graph.js'%}"></script>
 	</head>
 	<body>
 		<div class = "container">
@@ -28,13 +27,6 @@
 			</ul>
 			<div class = "form">
 				{% block form %}
-				{% endblock %}
-			</div>
-			<div class= 'graph'>
-				{% block chart %}
-				<div style="width: 50%">
-				<canvas id="canvas" height="450" width="600"></canvas>
-				</div>
 				{% endblock %}
 			</div>
 		</div>
