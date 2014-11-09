@@ -42,11 +42,8 @@ function list_companies(array) {
 $(document).ready(function(){
 	test = []
 	$.get('/all', function(data){
-		stockBar(10,15,"no","yes")
-		$.get('/try', function(data){
-			console.log('nested inside')
-			stockBar(10,15,"no","yes")
-		});
+		// stockBar(10,15,"no","yes")
+		console.log('hello')
 	}, 'json');
 
 	function trythis(data){
