@@ -39,3 +39,10 @@ class GraphView(View):
 
 	def post(self,request):
 		return render(request, self.template)
+
+class TryView(View):
+	template = 'valscrape/index.html'
+
+	def get(self,request):
+		new_string = "helo alksdjflakd  "
+		return render(request, self.template)

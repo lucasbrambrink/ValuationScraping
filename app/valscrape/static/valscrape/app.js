@@ -1,4 +1,4 @@
-function stockGraph(value1,value2,name1,name2) {
+function stockBar(value1,value2,name1,name2) {
 	
 	var barChartData = {
 		labels : [ name1, name2 ],
@@ -25,9 +25,9 @@ function stockGraph(value1,value2,name1,name2) {
 			responsive : true
 		});
 	}
-	console.log('inside')
+	console.log('inside graph function')
 }
-// stockGraph(10,15,"no","yes")
+// stockBar(10,15,"no","yes")
 
 function list_companies(array) {
 		$('#company_list').empty();
@@ -37,26 +37,29 @@ function list_companies(array) {
 		}
 	}
 
-function trythis() {
-	stockGraph(10,15,"no","yes");
-}
+
 
 $(document).ready(function(){
-	trythis()
+	test = []
+	$.get('/all', function(data){
+		stockBar(10,15,"no","yes")
+		$.get('/try', function(data){
+			console.log('nested inside')
+			stockBar(10,15,"no","yes")
+		});
+	}, 'json');
 
-	// $.get('/all', function(data){
-	// 	if(data['error']){
-	// 		alert(data['error'])
-	// 	} else { 
-	// 	list_companies(data['stocks']);
-	// 	}
-	// }, 'json');
-	// stockGraph(10,15,"no","yes")
-	$.get('/get', function(data){
-		console.log('try')
-		trythis()
-		console.log('past here')
-	},'json');
+	function trythis(data){
+		something = 10
+		console.log('inside try this')
+		test.push(10)
+	}
+	console.log(test)
+	// console.log(trythis())
+	// stockBar(10,15,"no","yes")
+	// $.get('/get', function(data){
+
+	// },'json');
 		// function(data){
 		// // var element = "<div style='width: 50%''><canvas id='canvas' height='450' width='600'></canvas></div>"
 		// // $('#graph').append(element);
