@@ -22,9 +22,7 @@ class AllView(View):
 		return redirect('index')
 
 	def get(self,request):
-		print('hello')
 		all_companies = Companies.objects.all()
-		print(all_companies)
 		company_array = []
 		for company in all_companies:
 			company_array.append(company.symbol)
@@ -60,10 +58,21 @@ def write_graph_file(request,data):
 		round(float(stock.EV_revenue),3),
 		round(float(stock.total_debt_equity[:-1]),3),
 		round(float(stock.return_on_equity[:-1]),3),
-		round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
+		round(round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3),3)]
 	chart_average = calculate_average()
 	## calculate percent difference ## 
-
+	delta_data = []
+	print(chart_average)
+	print(chart_data)
+	i = 0
+	while i < len(chart_data):
+		if chart_average[i] == 0:
+			delta = 0
+		else:
+			delta = (chart_data[i] - chart_average[i]) / chart_average[i] ## this returns a percent difference from average
+		delta_data.append(round(delta,3))
+		i += 1
+	print(delta_data)
 
 
 
@@ -91,11 +100,9 @@ def write_graph_file(request,data):
 			line += ","
 		i += 1
 	line += "])"
-	print(line)
 
 	## write to function-call to file ##
 	file_names = os.listdir('valscrape/static/valscrape')
-	print(file_names)
 	pathname = os.path.join('valscrape/static/valscrape',file_names[4])
 	graph = open(pathname, 'r').readlines()
 	graph[122] = line
@@ -121,7 +128,7 @@ def calculate_average():
 		average_debt_equity += round(float(stock.total_debt_equity[:-1]),3)
 		average_return_equity += round(float(stock.return_on_equity[:-1]),3)
 		if stock.revenue == "0":
-			average_cash_revenue = 0
+			average_cash_revenue += 0
 		else:
 			average_cash_revenue += round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
 	average_pe /= N
@@ -130,6 +137,6 @@ def calculate_average():
 	average_debt_equity /= N
 	average_return_equity /= N
 	average_cash_revenue /= N
-	average = [average_pe,average_EV_ebitda,average_EV_revenue,average_debt_equity,average_return_equity,average_cash_revenue]
+	average = [round(average_pe,3),round(average_EV_ebitda,3),round(average_EV_revenue,3),round(average_debt_equity,3),round(average_return_equity,3),round(average_cash_revenue,3)]
 	return average
 
