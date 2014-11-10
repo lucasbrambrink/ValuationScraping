@@ -1,0 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+.annual-report pre {
+    position: relative;
+    float: left;
+    background: white;
+    border: 1px solid grey;
+    margin-right: 3.8%;
+    padding: 12px;
+}
+
+.annual-report a {
+    color: #444;
+    display: inline-block;
+    width: 100%;
+    float: left;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.annual-report a:hover {
+    background-color: lightskyblue;
+}

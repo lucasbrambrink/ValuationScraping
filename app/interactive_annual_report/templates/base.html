@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<html lang="en">
+	<head>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <meta charset="UTF-8">
+        <title>Interactive Annual Report</title>
+
+		<link rel="stylesheet" src="{% static '/css/app.css' %}">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+        <link rel="stylesheet" href="{%static 'interactive_annual_report/css/app.css' %}">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+		<script src="{%static 'interactive_annual_report/js/django_ajax.js' %}"></script>
+		<script src="{%static 'interactive_annual_report/js/app.js' %}"></script>
+	</head>
+	<body>
+		<div class="container">
+		
+			<header>
+				{% block header %}
+                    <nav class="navbar navbar-defautl" role="navigation">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-band" href="#">Interactive Annual Report</a>
+                            </div>
+                            <div>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="">login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+				{% endblock %}
+			</header>
+
+			<div class="content">
+				{% block content %}
+
+				{% endblock %}
+			</div>
+
+		</div>
+	</body>

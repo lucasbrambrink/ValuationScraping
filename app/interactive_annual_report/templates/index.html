@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    <header>
+        <h1 class="stock"></h1>
+        <small>An interactive annual report</small>
+        <p>This is an interactive guide for understand important numbers in the annual report</p>
+        <p>You can access explanation of each number by <strong>mousing over</strong> or <strong>clicking</strong> them</p>
+    </header>
+
+    <button id="test-btn">TEST: IBM</button>
+
+    <div class="row">
+        <div class="container-flow">
+            <div class="annual-report col-lg-4">
+
+            </div>
+            <div class="guide col-lg-4">
+                <article id="tr" class="explanation hide">
+                    <h2>Revenue</h2>
+                    <p>The amount of money that a company actually receives during a specific period. It is also known as 'Sales' when calculating key statics</p>
+                </article>
+                <article id="gt" class="explanation hide">
+                    <h2>Gross Profit</h2>
+                </article>
+                <article id="ebit" class="explanation hide">
+                    <h2>Earning Before Interest and Taxes</h2>
+                </article>
+                <article id="ie" class="explanation hide">
+                    <h2>Interest Expense</h2>
+                </article>
+                <article id="ibt" class="explanation hide">
+                    <h2>Income Before Tax</h2>
+                </article>
+                <article id="ite" class="explanation hide">
+                    <h2>Income Tax Expense</h2>
+                </article>
+                <article id="ni" class="explanation hide">
+                    <h2>Net Income</h2>
+                </article>
+                <article id="cce" class="explanation hide">
+                    <h2>Cash And Cash Equivalents</h2>
+                </article>
+                <article id="sti" class="explanation hide">
+                    <h2>Short Term Investments</h2>
+                </article>
+                <article id="inventory" class="explanation hide">
+                    <h2>Inventory</h2>
+                </article>
+                <article id="tca" class="explanation hide">
+                    <h2>Total Current Asset</h2>
+                </article>
+                <article id="ppe" class="explanation hide">
+                    <h2>Property Plant and Equipment</h2>
+                </article>
+                <article id="ta" class="explanation hide">
+                    <h2>Total Assets</h2>
+                </article>
+                <article id="tcl" class="explanation hide">
+                    <h2>Total Current Liabilities</h2>
+                </article>
+                <article id="ltd" class="explanation hide">
+                    <h2>Long Term Debt</h2>
+                </article>
+                <article id="mi" class="explanation hide">
+                    <h2>Minority Interest</h2>
+                </article>
+                <article id="td" class="explanation hide">
+                    <h2>Total debt</h2>
+                </article>
+                <article id="tl" class="explanation hide">
+                    <h2>Total Liabilities</h2>
+                </article>
+                <article id="ps" class="explanation hide">
+                    <h2>Preferred Stock</h2>
+                </article>
+                <article id="tse" class="explanation hide">
+                    <h2>Total Stockholder Equity</h2>
+                </article>
+                <article id="tcso" class="explanation hide">
+                    <h2>Total Common Shares Outstanding</h2>
+                </article>
+                <article id="sp" class="explanation hide">
+                    <h2>Stock Price</h2>
+                </article>
+                <article id="dp" class="explanation hide">
+                    <h2>Dividends Paid</h2>
+                </article>
+            </div>
+        </div>
+    </div>
+{%endblock%}
