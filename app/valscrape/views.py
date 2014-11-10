@@ -60,6 +60,11 @@ def write_graph_file(request,data):
 		round(float(stock.return_on_equity[:-1]),3),
 		round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
 	chart_average = calculate_average()
+	## calculate percent difference ## 
+
+
+
+
 
 	## build line
 	line = "radarChart(["
@@ -90,7 +95,7 @@ def write_graph_file(request,data):
 	file_names = os.listdir('valscrape/static/valscrape')
 	pathname = os.path.join('valscrape/static/valscrape',file_names[3])
 	graph = open(pathname, 'r').readlines()
-	graph[145] = line
+	graph[155] = line
 	graph_out = open(pathname, 'w')
 	graph_out.writelines(graph)
 	graph_out.close()
@@ -110,12 +115,12 @@ def calculate_average():
 		average_pe += round(float(stock.trailing_pe),3)
 		average_EV_ebitda += round(float(stock.EV_EBITDA),3)
 		average_EV_revenue += round(float(stock.EV_revenue),3)
-		average_debt_equity = round(float(stock.total_debt_equity[:-1]),3)
-		average_return_equity = round(float(stock.return_on_equity[:-1]),3)
+		average_debt_equity += round(float(stock.total_debt_equity[:-1]),3)
+		average_return_equity += round(float(stock.return_on_equity[:-1]),3)
 		if stock.revenue == "0":
 			average_cash_revenue = 0
 		else:
-			average_cash_revenue = round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
+			average_cash_revenue += round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
 	average_pe /= N
 	average_EV_ebitda /= N
 	average_EV_revenue /= N
