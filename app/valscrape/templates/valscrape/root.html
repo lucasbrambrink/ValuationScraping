@@ -1,0 +1,27 @@
+
+
+{% load staticfiles %}
+<html>
+	<head>
+      <link rel='stylesheet' href="{%static 'assets/css/bootstrap.css'%}">
+      
+	</head>
+	<body>
+		<div class='container'>
+			<h1 class='bg-success'>Welcome to FinTech</h1>
+			<div class='row'>
+            <span class="col-lg4 col-lg-8 text-center">
+				<a href="/formula/" action="POST" class='lead'>Use the Magic Formula</a>
+            <img src="http://i.imgur.com/DmYO5DHl.jpg" class="img-responsive" alt="Responsive image" class="img-thumbnail" id='first_button'></span>
+			</div>
+         <div class='row'>
+         	<a href="/valuation/" action="POST" class='lead' class='bg-success'>Compare Valuation statistics for Equity</a>
+            <img src="http://i.imgur.com/F93FViQl.jpg" class="img-responsive" alt="Responsive image" id='second_button'>
+			</div>
+         <div class='row'>
+         	<a href="/report/" action="POST" class='lead' class='bg-success'>Visit the Interactive Annual Report</a>
+            <img src="http://i.imgur.com/ZcAaCUyl.jpg" class="img-responsive" alt="Responsive image" id='third_button'>
+			</div>
+      </div>
+	</body>
+</html>

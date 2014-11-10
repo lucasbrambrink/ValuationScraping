@@ -96,7 +96,7 @@ function lineChart(chart_labels,chart_data,chart_average) {
 		});
 	}
 }
-function polarAreaChart(chart_labels,chart_data) {
+function polarAreaChart(chart_labels,chart_data,target) {
 		var polarData = []
 		var polarColor = ["#F7464A","#46BFBD","#FDB45C","#949FB1","#4D5360"]
 		var polarHL = ["#FF5A5E","#5AD3D1","#FFC870","#A8B3C5","#616774",]
@@ -111,7 +111,7 @@ function polarAreaChart(chart_labels,chart_data) {
 
 
 	window.onload = function(){
-		var ctx = document.getElementById("chart-area").getContext("2d");
+		var ctx = document.getElementById("canvas"+target).getContext("2d");
 		window.myPolarArea = new Chart(ctx).PolarArea(polarData, {
 			responsive:true
 		});
@@ -121,4 +121,14 @@ function polarAreaChart(chart_labels,chart_data) {
 
 
 radarChart(['PE','EV / EBITDA','EV / Revenue','Debt / Equity','Return on Equity',' Free Cash / Revenue'],[28.47,4.65,3.72,8.64,8.44,1.499],[20.523,2.451,3.601,40.453,7.859,12.867])
+
+
+
+
+
+
+
+
+
+
 console.log('placeholder')
