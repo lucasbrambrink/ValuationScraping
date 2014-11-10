@@ -1,21 +1,21 @@
-function barChart(data,average) {
+function barChart(chart_labels,chart_data,chart_average) {
 	
 	var barChartData = {
-		labels : [ data[2], data[3] ],
+		labels : chart_labels,
 		datasets : [
 			{
 				fillColor : "rgba(220,220,220,0.5)",
 				strokeColor : "rgba(220,220,220,0.8)",
 				highlightFill: "rgba(220,220,220,0.75)",
 				highlightStroke: "rgba(220,220,220,1)",
-				data : [data_array[0],data_array[1]]
+				data : chart_data
 			},
 			{
 				fillColor : "rgba(151,187,205,0.5)",
 				strokeColor : "rgba(151,187,205,0.8)",
 				highlightFill : "rgba(151,187,205,0.75)",
 				highlightStroke : "rgba(151,187,205,1)",
-				data : [average[1]]
+				data : chart_average
 			}
 		]
 	}
@@ -138,9 +138,16 @@ function polarAreaChart(data,average) {
 		});
 	};
 }
+// New Text Goes Underneath
+
+
+
+barChart("PE", 1, 2)
+radarChart(['PE','EV / EBITDA','EV / Revenue','Debt / Equity','Return on Equity',' Free Cash / Revenue'],[16.69,4.1,3.73,32.57,10.14,0.645],[20.523,2.451,3.601,14.34,0.421,0.0])
+
+
+// End of New Text
 
 
 
 
-
-barChart([23.99,20.01,'PE','PEG'])

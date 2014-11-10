@@ -56,12 +56,35 @@ def write_graph_file(request,data):
 	chart_data = [round(float(stock.trailing_pe),3),
 		round(float(stock.EV_EBITDA),3),
 		round(float(stock.EV_revenue),3),
-		round(float(stock.total_debt_equity),3),
+		round(float(stock.total_debt_equity[:-1]),3),
 		round(float(stock.return_on_equity[:-1]),3),
 		round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
 	chart_average = calculate_average()
 
-	line = "barChart("+chart_labels+","+chart_data+","+chart_average+")"
+	## build line
+	line = "radarChart(["
+	i = 0
+	while i < len(chart_labels):
+		line += "'"+str(chart_labels[i])+"'"
+		if i+1 != len(chart_labels):
+			line += ","
+		i += 1
+	line += "],["
+	i = 0
+	while i < len(chart_data):
+		line += str(round(chart_data[i],3))
+		if i+1 != len(chart_data):
+			line += ","
+		i += 1
+	line += "],["
+	i = 0
+	while i < len(chart_average):
+		line += str(round(chart_average[i],3))
+		if i+1 != len(chart_average):
+			line += ","
+		i += 1
+	line += "])"
+	print(line)
 
 	## write to function-call to file ##
 	file_names = os.listdir('valscrape/static/valscrape')
@@ -87,9 +110,12 @@ def calculate_average():
 		average_pe += round(float(stock.trailing_pe),3)
 		average_EV_ebitda += round(float(stock.EV_EBITDA),3)
 		average_EV_revenue += round(float(stock.EV_revenue),3)
-		average_debt_equity = round(float(stock.total_debt_equity),3)
+		average_debt_equity = round(float(stock.total_debt_equity[:-1]),3)
 		average_return_equity = round(float(stock.return_on_equity[:-1]),3)
-		average_cash_revenue = round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
+		if stock.revenue == "0":
+			average_cash_revenue = 0
+		else:
+			average_cash_revenue = round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)
 	average_pe /= N
 	average_EV_ebitda /= N
 	average_EV_revenue /= N
