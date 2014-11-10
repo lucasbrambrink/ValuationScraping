@@ -23,7 +23,7 @@ class Finance_API:
 	def __init__(self):
 		self.base_link = 'http://finance.yahoo.com/q/ks?s='
 		self.end_link = '+Key+Statistics'
-		self.company_array = Companies.objects.all()#['GOOG'] # ,'APPL', ...]
+		self.company_array = Companies.objects.all()
 
 	def scrape(self):
 		for company in self.company_array:

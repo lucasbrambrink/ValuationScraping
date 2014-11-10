@@ -22,7 +22,9 @@ class AllView(View):
 		return redirect('index')
 
 	def get(self,request):
+		print('hello')
 		all_companies = Companies.objects.all()
+		print(all_companies)
 		company_array = []
 		for company in all_companies:
 			company_array.append(company.symbol)
@@ -93,9 +95,10 @@ def write_graph_file(request,data):
 
 	## write to function-call to file ##
 	file_names = os.listdir('valscrape/static/valscrape')
-	pathname = os.path.join('valscrape/static/valscrape',file_names[3])
+	print(file_names)
+	pathname = os.path.join('valscrape/static/valscrape',file_names[4])
 	graph = open(pathname, 'r').readlines()
-	graph[155] = line
+	graph[122] = line
 	graph_out = open(pathname, 'w')
 	graph_out.writelines(graph)
 	graph_out.close()
