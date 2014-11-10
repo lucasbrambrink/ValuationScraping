@@ -153,4 +153,4 @@ function polarAreaChart(chart_labels,chart_data) {
 // New Text Goes Underneath
 
 
-radarChart(['PE','EV / EBITDA','EV / Revenue','Debt / Equity','Return on Equity',' Free Cash / Revenue'],[39.78,3.62,5.22,1.29,5.0,82.425],[20.523,2.451,3.601,40.453,7.859,0.0])
+barChart(['PE','EV / EBITDA','EV / Revenue','Debt / Equity','Return on Equity',' Free Cash / Revenue'],[16.69,4.1,3.73,32.57,10.14,0.645],[20.523,2.451,3.601,40.453,7.859,0.0])

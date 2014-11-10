@@ -30,15 +30,30 @@ class AllView(View):
 
 class GraphView(View):
 	template = 'valscrape/bar.html'
+	def get(self, request, data):
+		company = Companies.objects.get(symbol=data)
+		return render(request, self.template, {'company' : company})
+
+	def post(self,request):
+		return render(request, self.template)
+
+
+class GenerateGraphView(View):
+	template = 'valscrape/bar.html'
 
 	def get(self,request):
-		name_value = []
-		all_stocks = Stocks.objects.all()
-		for stock in all_stocks:
-			company = Companies.objects.get(id=int(stock.company_id))
-			name_value_pair = (company.name,stock.trailing_pe)
-			name_value.append(name_value_pair)
-		return JsonResponse({'pe': name_value})
+		company = Companies.objects.get(symbol=request.GET['SYMBOL'])
+		stock = Stocks.objects.get(company_id=company.id)
+		chart_labels = ["PE","EV / EBITDA", "EV / Revenue", "Debt / Equity", "Return on Equity", " Free Cash / Revenue"]
+		chart_data = [round(float(stock.trailing_pe),3),
+			round(float(stock.EV_EBITDA),3),
+			round(float(stock.EV_revenue),3),
+			round(float(stock.total_debt_equity[:-1]),3),
+			round(float(stock.return_on_equity[:-1]),3),
+			round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
+		chart_average = calculate_average()
+		data = [chart_labels,chart_data,chart_average]
+		return JsonResponse({'data': data})
 
 
 	def post(self,request):
@@ -67,7 +82,7 @@ def write_graph_file(request,data):
 
 
 	## build line
-	line = "radarChart(["
+	line = "barChart(["
 	i = 0
 	while i < len(chart_labels):
 		line += "'"+str(chart_labels[i])+"'"
@@ -93,7 +108,7 @@ def write_graph_file(request,data):
 
 	## write to function-call to file ##
 	file_names = os.listdir('valscrape/static/valscrape')
-	pathname = os.path.join('valscrape/static/valscrape',file_names[3])
+	pathname = os.path.join('valscrape/static/valscrape',file_names[5])
 	graph = open(pathname, 'r').readlines()
 	graph[155] = line
 	graph_out = open(pathname, 'w')

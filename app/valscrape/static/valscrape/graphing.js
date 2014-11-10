@@ -1,11 +1,3 @@
-function list_companies(array) {
-		$('#company_list').empty();
-		for(var i = 0; i < array.length; i++){
-			var element = array[i]
-			$('#company_list').append("<li><a href='/chart/"+element+"'>"+element+"</a></li>");
-		}
-	}
-
 function barChart(chart_labels,chart_data,chart_average) {
 	
 	var barChartData = {
@@ -54,8 +46,8 @@ function polarAreaChart(chart_labels,chart_data) {
 
 
 $(document).ready(function(){
-	$.get('/all', function(data){
-		list_companies(data['companies']);
+	$.get('/render',{ SYMBOL: $('#symbol').text() }, function(data){
+		barChart(data['data'][0],data['data'][1],data['data'][2])
 	}, 'json');
 
 })

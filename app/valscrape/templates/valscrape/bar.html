@@ -1,17 +1,19 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<link rel='stylesheet' src='{%static '/assets/css/bootstrap.css'%}'>
+		<link rel='stylesheet' href='{%static 'assets/css/bootstrap.css'%}'>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src = "{%static 'valscrape/django_ajax.js'%}"></script>
-		<script src = "{%static 'valscrape/app.js'%}"></script>
 		<script src="{%static 'valscrape/Chart.js'%}"></script>
-		<script src="{%static 'valscrape/graph.js'%}"></script>
+		<script src="{%static 'valscrape/graphing.js'%}"></script>
 	</head>
 	<body>
-		<h1>{{ company.name }}</h1>
+	<div class='container'>
+		<p id='symbol' style='display:none;'>{{ company.symbol }}</p>
+		<h1 id='name'>{{ company.name }}</h1>
 		<div style="width: 50%">
 			<canvas id="canvas" height="450" width="600"></canvas>
 		</div>
+	<div>
 	</body>
 </html>
