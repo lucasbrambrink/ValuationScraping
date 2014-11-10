@@ -6,7 +6,8 @@ import json
 import os
 
 # Create your views here.
-
+def root(request):
+	return render(request, 'valscrape/root.html')
 
 class IndexView(View):
 	template = 'valscrape/index.html'
@@ -30,19 +31,20 @@ class AllView(View):
 
 class GraphView(View):
 	template = 'valscrape/bar.html'
-	def get(self, request, data):
+	def post(self, request, data, kind):
 		company = Companies.objects.get(symbol=data)
-		return render(request, self.template, {'company' : company})
+		return render(request, self.template, {'company' : company, 'kind': kind})
 
-	def post(self,request):
-		return render(request, self.template)
+	# def post(self,request):
+	# 	return render(request, self.template)
 
 
 class GenerateGraphView(View):
 	template = 'valscrape/bar.html'
 
 	def get(self,request):
-		company = Companies.objects.get(symbol=request.GET['SYMBOL'])
+		symbol,kind = request.GET['SYMBOL'].split(",")
+		company = Companies.objects.get(symbol=symbol)
 		stock = Stocks.objects.get(company_id=company.id)
 		chart_labels = ["PE","EV / EBITDA", "EV / Revenue", "Debt / Equity", "Return on Equity", " Free Cash / Revenue"]
 		chart_data = [round(float(stock.trailing_pe),3),
@@ -52,8 +54,23 @@ class GenerateGraphView(View):
 			round(float(stock.return_on_equity[:-1]),3),
 			round(float(stock.levered_free_cash_flow[:-1]),3)/round(float(stock.revenue[:-1]),3)]
 		chart_average = calculate_average()
+		## calculate percent difference ## 
+		delta_data = []
+		i = 0
+		while i < len(chart_data):
+			if chart_average[i] == 0:
+				delta = 0
+			else:
+				delta = (chart_data[i] - chart_average[i]) / chart_average[i] ## this returns a percent difference from average
+			delta_data.append(round(delta,3))
+			i += 1
+
 		data = [chart_labels,chart_data,chart_average]
-		return JsonResponse({'data': data})
+		polar = [chart_labels,chart_data]
+		if kind == 'bar':
+			return JsonResponse({'bar': data})
+		if kind == 'polar':
+			return JsonResponse({'polar': polar})
 
 
 	def post(self,request):

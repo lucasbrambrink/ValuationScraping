@@ -1,0 +1,18 @@
+{% load staticfiles %}
+<html>
+   <head>
+      <link rel='stylesheet' href='{%static 'assets/css/bootstrap.css'%}'>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="{%static 'valscrape/Chart.js'%}"></script>
+   </head>
+   <body>
+      <div class = "container">
+         <h1 class='bg-primary'>Welcome to FinTech</h1>
+         <ul>
+            <li><a href='{% url 'report:index' %}'><h2>Check out an interactive Annual Finance Report</h2></a></li>
+            <li><a href='{% url 'valscrape:index' %}'><h2>Go to individual Valuation information on Equity</h2></li>
+            <li><a href='{% url 'formula:index' %}'><h2>Visit the Magic Formula</h2></li>
+         </ul>
+      </div>
+   </body>
+</html>

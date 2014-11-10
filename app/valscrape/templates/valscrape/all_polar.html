@@ -9,11 +9,13 @@
 	</head>
 	<body>
 	<div class='container'>
+		{% for company in companies %}
 		<p id='symbol' style='display:none;'>{{ company.symbol }},{{ kind }}</p>
 		<h1 id='name'>{{ company.name }}</h1>
-		<div style="width: 50%">
-			<canvas id="canvas" height="450" width="600"></canvas>
+		<div style="width: 50%" style='display:inline;'>
+			<canvas id="canvas{{company.symbol}}" height="450" width="600"></canvas>
 		</div>
+		{% endfor %}
 	<div>
 	</body>
 </html>

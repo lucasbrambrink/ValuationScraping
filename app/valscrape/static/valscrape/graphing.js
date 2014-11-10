@@ -37,7 +37,7 @@ function polarAreaChart(chart_labels,chart_data) {
 					label: chart_labels[i]
 				})
 		}
-	var ctx = document.getElementById("chart-area").getContext("2d");
+	var ctx = document.getElementById("canvas").getContext("2d");
 	new Chart(ctx).PolarArea(polarData, {
 			responsive:true
 		});
@@ -46,8 +46,14 @@ function polarAreaChart(chart_labels,chart_data) {
 
 
 $(document).ready(function(){
-	$.get('/render',{ SYMBOL: $('#symbol').text() }, function(data){
-		barChart(data['data'][0],data['data'][1],data['data'][2])
+	$.get('/valscrape/render',{ SYMBOL: $('#symbol').text() }, function(data){
+		console.log(data['bar'])
+		if (data['polar']){
+		polarAreaChart(data['polar'][0],data['polar'][1])
+		} else {
+		barChart(data['bar'][0],data['bar'][1],data['bar'][2])
+		}
 	}, 'json');
+
 
 })

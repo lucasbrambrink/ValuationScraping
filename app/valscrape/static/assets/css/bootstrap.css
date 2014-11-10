@@ -13,6 +13,15 @@ html {
 body {
   margin: 0;
 }
+.button {
+  display: inline;
+  margin-left: 4em;
+}
+
+.companies:hover {
+  background-color: rgb(0,255,255);
+}
+
 article,
 aside,
 details,
